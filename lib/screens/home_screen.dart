@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void getData() async {
     var response = await Dio().get('https://api.coincap.io/v2/assets');
     List<Crypto> cryptoList = response.data['data']
-        .map((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
+        .map<Crypto>((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
         .toList()
         .cast<Crypto>();
 
