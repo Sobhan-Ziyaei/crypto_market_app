@@ -33,22 +33,54 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
       ),
       backgroundColor: CustomColor.blackColor,
       body: SafeArea(
-          child: RefreshIndicator(
-        backgroundColor: CustomColor.greenColor,
-        color: CustomColor.blackColor,
-        onRefresh: () async {
-          List<Crypto> fereshData = await _getData();
-          setState(() {
-            cryptoList = fereshData;
-          });
-        },
-        child: ListView.builder(
-          itemCount: cryptoList!.length,
-          itemBuilder: (context, index) {
-            return _getItemList(cryptoList![index]);
-          },
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: TextField(
+                  onChanged: (value) {
+                    _getSearchResultList(value);
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: CustomColor.greenColor,
+                    hintText: 'اسم رمز ارز معتبر خود را وارد کنید',
+                    hintStyle:
+                        TextStyle(color: Colors.white, fontFamily: 'morabaee'),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: RefreshIndicator(
+                backgroundColor: CustomColor.greenColor,
+                color: CustomColor.blackColor,
+                onRefresh: () async {
+                  List<Crypto> fereshData = await _getData();
+                  setState(() {
+                    cryptoList = fereshData;
+                  });
+                },
+                child: ListView.builder(
+                  itemCount: cryptoList!.length,
+                  itemBuilder: (context, index) {
+                    return _getItemList(cryptoList![index]);
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
-      )),
+      ),
     );
   }
 
@@ -127,5 +159,17 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
         .toList()
         .cast<Crypto>();
     return cryptoList;
+  }
+
+  void _getSearchResultList(String enteredKeyword) {
+    List<Crypto> searchResultList = [];
+    searchResultList = cryptoList!.where((element) {
+      return element.name.toLowerCase().contains(
+            enteredKeyword.toLowerCase(),
+          );
+    }).toList();
+    setState(() {
+      cryptoList = searchResultList;
+    });
   }
 }
