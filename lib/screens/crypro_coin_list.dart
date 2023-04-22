@@ -1,5 +1,6 @@
 import 'package:crypto_market_app/data/constant/custom_color.dart';
 import 'package:crypto_market_app/data/model/crypro.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class CryptoCoinList extends StatefulWidget {
@@ -32,13 +33,22 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
       ),
       backgroundColor: CustomColor.blackColor,
       body: SafeArea(
+          child: RefreshIndicator(
+        backgroundColor: CustomColor.greenColor,
+        color: CustomColor.blackColor,
+        onRefresh: () async {
+          List<Crypto> fereshData = await _getData();
+          setState(() {
+            cryptoList = fereshData;
+          });
+        },
         child: ListView.builder(
           itemCount: cryptoList!.length,
           itemBuilder: (context, index) {
             return _getItemList(cryptoList![index]);
           },
         ),
-      ),
+      )),
     );
   }
 
@@ -108,5 +118,14 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
 
   Color _getChangeColorText(double percentChange) {
     return percentChange <= 0 ? CustomColor.redColor : CustomColor.greenColor;
+  }
+
+  Future<List<Crypto>> _getData() async {
+    var response = await Dio().get('https://api.coincap.io/v2/assets');
+    List<Crypto> cryptoList = response.data['data']
+        .map<Crypto>((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
+        .toList()
+        .cast<Crypto>();
+    return cryptoList;
   }
 }
