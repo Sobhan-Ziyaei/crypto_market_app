@@ -20,45 +20,61 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: cryptoList!.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-              title: Text(cryptoList![index].name),
-              subtitle: Text(cryptoList![index].symbol),
-              leading: SizedBox(
-                width: 30,
-                child: Center(
-                  child: Text(
-                    cryptoList![index].rank.toString(),
+      backgroundColor: CustomColor.blackColor,
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: cryptoList!.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+                title: Text(
+                  cryptoList![index].name,
+                  style: TextStyle(color: CustomColor.greenColor),
+                ),
+                subtitle: Text(
+                  cryptoList![index].symbol,
+                  style: TextStyle(color: CustomColor.greyColor),
+                ),
+                leading: SizedBox(
+                  width: 30,
+                  child: Center(
+                    child: Text(
+                      cryptoList![index].rank.toString(),
+                      style: TextStyle(color: CustomColor.greyColor),
+                    ),
                   ),
                 ),
-              ),
-              trailing: SizedBox(
-                width: 150,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          cryptoList![index].priceUsd.toStringAsFixed(2),
-                        ),
-                        Text(
-                          cryptoList![index].changePercent.toStringAsFixed(2),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                        width: 50,
-                        child: Center(
-                            child: _getIconPercentChange(
-                                cryptoList![index].changePercent))),
-                  ],
-                ),
-              ));
-        },
+                trailing: SizedBox(
+                  width: 150,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            cryptoList![index].priceUsd.toStringAsFixed(2),
+                            style: TextStyle(color: CustomColor.greyColor),
+                          ),
+                          Text(
+                            cryptoList![index].changePercent.toStringAsFixed(2),
+                            style: TextStyle(
+                              color: _getChangeColorText(
+                                  cryptoList![index].changePercent),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                          width: 50,
+                          child: Center(
+                              child: _getIconPercentChange(
+                                  cryptoList![index].changePercent))),
+                    ],
+                  ),
+                ));
+          },
+        ),
       ),
     );
   }
@@ -75,5 +91,9 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
             size: 24,
             color: CustomColor.greenColor,
           );
+  }
+
+  Color _getChangeColorText(double percentChange) {
+    return percentChange <= 0 ? CustomColor.redColor : CustomColor.greenColor;
   }
 }
