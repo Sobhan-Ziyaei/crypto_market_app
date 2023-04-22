@@ -1,16 +1,24 @@
-# crypto_market_app
 
-A new Flutter project.
+# Crypto Market 
 
-## Getting Started
+A brief description of what this project does and who it's for
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# Crypto Market 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+This app show the list of coin in crypto market
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Features
+
+
+- Live previews
+- Fullscreen mode
+- Cross platform
+
+
+# Crypto Market 
+
+A brief description of what this project does and who it's for
+
+
