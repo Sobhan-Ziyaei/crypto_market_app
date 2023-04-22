@@ -7,10 +7,15 @@ class Crypto {
   double changePercent;
   double marketCapUsd;
 
-  Crypto(this.id, this.name, this.rank, this.symbol, this.priceUsd,
-      this.marketCapUsd, this.changePercent);
-
-
+  Crypto(
+    this.id,
+    this.name,
+    this.rank,
+    this.symbol,
+    this.priceUsd,
+    this.changePercent,
+    this.marketCapUsd,
+  );
 
   factory Crypto.fromMapJson(Map<String, dynamic> jsonMapObject) {
     return Crypto(
