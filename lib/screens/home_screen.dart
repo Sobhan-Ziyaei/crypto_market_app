@@ -1,4 +1,4 @@
-import 'package:crypto_market_app/constant/color.dart';
+import 'package:crypto_market_app/data/constant/custom_color.dart';
 import 'package:crypto_market_app/data/model/crypro.dart';
 import 'package:crypto_market_app/screens/crypro_coin_list.dart';
 import 'package:dio/dio.dart';
