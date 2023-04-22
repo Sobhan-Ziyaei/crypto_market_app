@@ -161,8 +161,15 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
     return cryptoList;
   }
 
-  void _getSearchResultList(String enteredKeyword) {
+  Future<void> _getSearchResultList(String enteredKeyword) async {
     List<Crypto> searchResultList = [];
+    if (enteredKeyword.isEmpty) {
+      var result = await _getData();
+      setState(() {
+        cryptoList = result;
+      });
+      return;
+    }
     searchResultList = cryptoList!.where((element) {
       return element.name.toLowerCase().contains(
             enteredKeyword.toLowerCase(),
