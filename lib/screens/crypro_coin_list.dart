@@ -12,6 +12,7 @@ class CryptoCoinList extends StatefulWidget {
 
 class _CryptoCoinListState extends State<CryptoCoinList> {
   List<Crypto>? cryptoList;
+  bool isSearchLoadingVisible = false;
   @override
   void initState() {
     super.initState();
@@ -58,6 +59,14 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            Visibility(
+              visible: isSearchLoadingVisible,
+              child: Text(
+                '...در حال آپدیت لیست رمز ارزها',
+                style: TextStyle(
+                    color: CustomColor.greenColor, fontFamily: 'morabaee'),
               ),
             ),
             Expanded(
@@ -164,9 +173,13 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
   Future<void> _getSearchResultList(String enteredKeyword) async {
     List<Crypto> searchResultList = [];
     if (enteredKeyword.isEmpty) {
+      setState(() {
+        isSearchLoadingVisible = true;
+      });
       var result = await _getData();
       setState(() {
         cryptoList = result;
+        isSearchLoadingVisible = false;
       });
       return;
     }
