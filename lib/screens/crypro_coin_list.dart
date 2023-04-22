@@ -35,56 +35,58 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
         child: ListView.builder(
           itemCount: cryptoList!.length,
           itemBuilder: (context, index) {
-            return ListTile(
-                title: Text(
-                  cryptoList![index].name,
-                  style: TextStyle(color: CustomColor.greenColor),
-                ),
-                subtitle: Text(
-                  cryptoList![index].symbol,
-                  style: TextStyle(color: CustomColor.greyColor),
-                ),
-                leading: SizedBox(
-                  width: 30,
-                  child: Center(
-                    child: Text(
-                      cryptoList![index].rank.toString(),
-                      style: TextStyle(color: CustomColor.greyColor),
-                    ),
-                  ),
-                ),
-                trailing: SizedBox(
-                  width: 150,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            cryptoList![index].priceUsd.toStringAsFixed(2),
-                            style: TextStyle(
-                                color: CustomColor.greyColor, fontSize: 18),
-                          ),
-                          Text(
-                            cryptoList![index].changePercent.toStringAsFixed(2),
-                            style: TextStyle(
-                              color: _getChangeColorText(
-                                  cryptoList![index].changePercent),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                          width: 50,
-                          child: Center(
-                              child: _getIconPercentChange(
-                                  cryptoList![index].changePercent))),
-                    ],
-                  ),
-                ));
+            return _getItemList(cryptoList![index]);
           },
+        ),
+      ),
+    );
+  }
+
+  Widget _getItemList(Crypto crypto) {
+    return ListTile(
+      title: Text(
+        crypto.name,
+        style: TextStyle(color: CustomColor.greenColor),
+      ),
+      subtitle: Text(
+        crypto.symbol,
+        style: TextStyle(color: CustomColor.greyColor),
+      ),
+      leading: SizedBox(
+        width: 30,
+        child: Center(
+          child: Text(
+            crypto.rank.toString(),
+            style: TextStyle(color: CustomColor.greyColor),
+          ),
+        ),
+      ),
+      trailing: SizedBox(
+        width: 150,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  crypto.priceUsd.toStringAsFixed(2),
+                  style: TextStyle(color: CustomColor.greyColor, fontSize: 18),
+                ),
+                Text(
+                  crypto.changePercent.toStringAsFixed(2),
+                  style: TextStyle(
+                    color: _getChangeColorText(crypto.changePercent),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+                width: 50,
+                child:
+                    Center(child: _getIconPercentChange(crypto.changePercent))),
+          ],
         ),
       ),
     );
