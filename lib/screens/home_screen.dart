@@ -23,12 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColor.blackColor,
-      body: SpinKitRotatingCircle(
-        color: Colors.white,
-        size: 50.0,
-      ),
-    );
+        backgroundColor: CustomColor.blackColor,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/logo.png'),
+            SpinKitRotatingCircle(
+              color: Colors.white,
+              size: 50.0,
+            ),
+          ],
+        ));
   }
 
   void getData() async {

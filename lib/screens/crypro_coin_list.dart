@@ -1,3 +1,4 @@
+import 'package:crypto_market_app/data/constant/custom_color.dart';
 import 'package:crypto_market_app/data/model/crypro.dart';
 import 'package:flutter/material.dart';
 
@@ -67,12 +68,12 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
         ? Icon(
             Icons.trending_down,
             size: 24,
-            color: Colors.red,
+            color: CustomColor.redColor,
           )
         : Icon(
             Icons.trending_up,
             size: 24,
-            color: Colors.green,
+            color: CustomColor.greenColor,
           );
   }
 }
