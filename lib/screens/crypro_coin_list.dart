@@ -20,6 +20,16 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: CustomColor.blackColor,
+        title: Text(
+          'بازار  کریپتو',
+          style: TextStyle(fontFamily: 'morabaee'),
+        ),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+      ),
       backgroundColor: CustomColor.blackColor,
       body: SafeArea(
         child: ListView.builder(
@@ -54,7 +64,8 @@ class _CryptoCoinListState extends State<CryptoCoinList> {
                         children: [
                           Text(
                             cryptoList![index].priceUsd.toStringAsFixed(2),
-                            style: TextStyle(color: CustomColor.greyColor),
+                            style: TextStyle(
+                                color: CustomColor.greyColor, fontSize: 18),
                           ),
                           Text(
                             cryptoList![index].changePercent.toStringAsFixed(2),
